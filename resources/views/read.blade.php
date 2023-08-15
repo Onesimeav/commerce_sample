@@ -21,11 +21,11 @@
                     <li>
                         {{ $product-> keywords }};
                     </li>
-                    <ul>
+                    <li>
                         @foreach($product-> images as $image)
                             {{ $image-> url}};
                         @endforeach
-                    </ul>
+                    </li>
                 </ul>
             </li>
         </ol>
