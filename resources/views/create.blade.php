@@ -19,7 +19,7 @@
         <input type="text" id="keywords" name="keywords"><br>
         <label for="image">Url-Image:</label><br>
         <input type="text" id="image" name="image"><br>
-        <input type="submit" name="save">
+        <button type="submit">Creer</button>
     </form>
 </body>
 </html>

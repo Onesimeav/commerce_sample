@@ -6,6 +6,7 @@
     <title>Laravel</title>
 </head>
 <body class="antialiased">
+<a href="/product/create"><button>Creer</button></a><br>
     <h1>Liste des produits</h1>
     @foreach ($productTable as $product)
         <ol>
@@ -19,15 +20,20 @@
                         {{ $product-> description }};
                     </li>
                     <li>
-                        {{ $product-> keywords }};
+                        @foreach($product->keywords as $keyword)
+                            {{ $keyword }},
+                        @endforeach;
                     </li>
-                    <li>
                         @foreach($product-> images as $image)
+                        <li>
+
                             {{ $image-> url}};
+                        </li>
                         @endforeach
-                    </li>
                 </ul>
             </li>
+            <a href="{{url('product/update/'.$product->id)}}"><button>Modifier</button></a><br>
+            <a href="{{url('product/delete/'.$product->id)}}"><button>Supprimer</button></a>
         </ol>
     @endforeach
 
