@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductImage;
+use App\Models\Products;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class ProductsController extends Controller
@@ -31,13 +30,17 @@ class ProductsController extends Controller
         $entity->keywords=$request->keywords;
         $entity->save();
 
-        $queryResult=DB::table('products')->where('name', $entity->name)->value('id');
+        $newEntity=new ProductImage();
+        $newEntity->url=$request->image;
+        $newEntity->product_id=$entity->id;
+        $newEntity->save();
+    }
 
-        $entity=new ProductImage();
-        $entity->url=$request->image;
-        $entity->product_id=$queryResult;
-        $entity->save();
-
-
+    public function read()
+    {
+        $productTable=Products::paginate( 10, ['name','description','price','keywords']);
+        $imageTable=ProductImage::paginate(10, ['url']);
+        return \view('read',['productTable'=>$productTable,
+                                   'imageTable'=>$imageTable ]);
     }
 }
