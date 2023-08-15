@@ -38,9 +38,7 @@ class ProductsController extends Controller
 
     public function read()
     {
-        $productTable=Products::paginate( 10, ['name','description','price','keywords']);
-        $imageTable=ProductImage::paginate(10, ['url']);
-        return \view('read',['productTable'=>$productTable,
-                                   'imageTable'=>$imageTable ]);
+        $productTable=Products::with('images')->paginate( 10);
+        return \view('read',compact('productTable'));
     }
 }
