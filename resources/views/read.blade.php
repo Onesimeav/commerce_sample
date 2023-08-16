@@ -33,7 +33,8 @@
                 </ul>
             </li>
             <a href="{{url('product/update/'.$product->id)}}"><button>Modifier</button></a><br>
-            <a href="{{url('product/delete/'.$product->id)}}"><button>Supprimer</button></a>
+            <a href="{{url('product/delete/'.$product->id)}}"><button>Supprimer</button></a><br>
+            <a href="{{url('product/update-image/'.$product->id)}}"><button>Modifeir Image</button></a><br>
         </ol>
     @endforeach
 

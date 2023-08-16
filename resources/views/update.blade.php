@@ -18,8 +18,6 @@
         <input type="text" id="description" name="description" value="{{$product->description}}"><br>
         <label for="keywords">Mots-clés:</label><br>
         <input type="text" id="keywords" name="keywords" value="{{$product->keywords}}"><br>
-        <label for="image">Url-Image:</label><br>
-        <input type="text" id="image" name="image" value="{{$product->images}}"><br>
         <button type="submit">Mettre à jour</button>
 </form>
 </body>

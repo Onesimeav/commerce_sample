@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductImage;
 use App\Models\Products;
+use Illuminate\Database\Console\Migrations\ResetCommand;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -70,20 +71,47 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
-        $product= Products::with('images')->find($id);
+        $product= Products::find($id);
         return \view('update', compact('product'));
     }
 
     public function update(Request $request, $id)
     {
-        $product= Products::with('images')->find($id);
+        $this->validate($request,
+            [
+                'name' => ['required'],
+                'price'=> ['required', 'integer'],
+                'description'=> ['required'],
+                'keywords'=>['required'],
+            ]);
+
+        $product= Products::find($id);
+
         $product->name= $request->name;
         $product->description= $request->description;
         $product->price= $request->price;
         $product->keywords= $request->keywords;
-        $product->images= $request->image;
         $product->update();
-        return \view('read');
+        return $this->read();
+    }
+
+    public function editImage($id)
+    {
+        $product_image=ProductImage::where('product_id',$id)->first();
+        return \view('update-image', compact('product_image'));
+    }
+
+    public function updateImage(Request $request, $id)
+    {
+        $product_image=ProductImage::find($id);
+        $this->validate($request,
+            [
+                'image'=>['required','URL'],
+            ]);
+        $product_image->url=$request->url;
+        $product_image->update();
+        return $this->read();
+
     }
 
     public function delete($id)
@@ -92,4 +120,6 @@ class ProductsController extends Controller
         $product->delete();
         return $this->read();
     }
+
+
 }
