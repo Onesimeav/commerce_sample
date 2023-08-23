@@ -106,7 +106,7 @@ class ProductsController extends Controller
         $product_image=ProductImage::find($id);
         $this->validate($request,
             [
-                'image'=>['required','URL'],
+                'url'=>['required','URL'],
             ]);
         $product_image->url=$request->url;
         $product_image->update();
@@ -121,5 +121,10 @@ class ProductsController extends Controller
         return $this->read();
     }
 
-
+    public function view_product($id)
+    {
+        $product= Products::find($id);
+        $product->keywords=$this->keywords_validators($product->keywords);
+        return \view('view-product', compact('product'));
+    }
 }
