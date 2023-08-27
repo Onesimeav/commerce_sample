@@ -32,5 +32,5 @@ Route::put('product/update-image/{id}', [ProductsController::class, 'updateImage
 
 Route::get('product/view/{id}', [ProductsController::class, 'view_product']);
 
-Route::post('product/add-cat/{id}', [CartsController::class,'addToCart']);
+Route::post('product/add-cart/{id}', [CartsController::class,'addToCart']);
 

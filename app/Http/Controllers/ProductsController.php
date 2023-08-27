@@ -121,10 +121,10 @@ class ProductsController extends Controller
         return $this->read();
     }
 
-    public function view_product($id)
+    public function view_product(Request $request, $id)
     {
         $product= Products::find($id);
         $product->keywords=$this->keywords_validators($product->keywords);
-        return \view('view-product', compact('product'));
+        return \view('view-product', compact('product','request'));
     }
 }
